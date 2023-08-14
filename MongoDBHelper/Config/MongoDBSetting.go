@@ -24,7 +24,11 @@ var instance *Config
 func GetInstance() *Config {
 	if instance == nil {
 		instance = &Config{}
-		instance.loadSetting()
+		err := instance.loadSetting()
+		if err != nil {
+			fmt.Println("Load MongoDBSetting.json failed, err: ", err)
+			return nil
+		}
 	}
 	return instance
 }
